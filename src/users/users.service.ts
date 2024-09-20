@@ -32,4 +32,12 @@ export class UsersService {
     }
     return null;
   }
+
+  async findByEmail(email: string): Promise<User | undefined> {
+    return this.usersRepository.findOne({ where: { email } });
+  }
+
+  async findById(id: number): Promise<User | undefined> {
+    return this.usersRepository.findOne({ where: { id } });
+  }
 }

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Reservation } from './reservation.entity';
@@ -17,6 +17,14 @@ export class ReservationsService {
     place: string,
     user: User,
   ): Promise<Reservation> {
+    const existingReservation = await this.reservationRepository.findOne({
+      where: { date, time, place },
+    });
+
+    if (existingReservation) {
+      throw new Error('이미 해당 시간에 예약이 존재합니다.');
+    }
+
     const reservation = this.reservationRepository.create({
       date,
       time,
@@ -27,10 +35,54 @@ export class ReservationsService {
   }
 
   async getUserReservations(user: User): Promise<Reservation[]> {
-    return this.reservationRepository.find({ where: { user } });
+    return this.reservationRepository.find({
+      where: { user },
+      relations: ['user'],
+    });
+  }
+
+  async getReservationsByDate(date: string): Promise<Reservation[]> {
+    return this.reservationRepository.find({
+      where: { date },
+      relations: ['user'],
+    });
   }
 
   async cancelReservation(id: number): Promise<void> {
+    const reservation = await this.reservationRepository.findOne({
+      where: { id },
+      relations: ['user'],
+    });
+    if (!reservation) {
+      throw new NotFoundException('Reservation not found');
+    }
     await this.reservationRepository.delete(id);
+  }
+
+  async getAllReservations(): Promise<Reservation[]> {
+    return this.reservationRepository.find({ relations: ['user'] });
+  }
+
+  async updateReservation(
+    id: number,
+    date: string,
+    time: string,
+    place: string,
+    user: User,
+  ): Promise<Reservation> {
+    const reservation = await this.reservationRepository.findOne({
+      where: { id, user },
+      relations: ['user'],
+    });
+
+    if (!reservation) {
+      throw new NotFoundException('Reservation not found');
+    }
+
+    reservation.date = date;
+    reservation.time = time;
+    reservation.place = place;
+
+    return this.reservationRepository.save(reservation);
   }
 }

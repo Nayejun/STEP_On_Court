@@ -34,12 +34,11 @@ export class UsersController {
     @Body('email') email: string,
     @Body('password') password: string,
   ) {
-    const user = await this.usersService.validateUser(email, password);
-    if (!user) {
-      throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);
+    try {
+      const token = await this.authService.login(email, password);
+      return { message: 'Login successful', token };
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.UNAUTHORIZED);
     }
-
-    const token = await this.authService.login(user);
-    return { message: 'Login successful', token };
   }
 }

@@ -15,6 +15,6 @@ export class Reservation {
   @Column()
   place: string;
 
-  @ManyToOne(() => User, (user) => user.reservations)
+  @ManyToOne(() => User, (user) => user.reservations, { eager: true })
   user: User;
 }
