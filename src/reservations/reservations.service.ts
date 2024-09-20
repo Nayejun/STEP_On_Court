@@ -17,14 +17,6 @@ export class ReservationsService {
     place: string,
     user: User,
   ): Promise<Reservation> {
-    const existingReservation = await this.reservationRepository.findOne({
-      where: { date, time, place },
-    });
-
-    if (existingReservation) {
-      throw new Error('이미 해당 시간에 예약이 존재합니다.');
-    }
-
     const reservation = this.reservationRepository.create({
       date,
       time,
