@@ -28,8 +28,8 @@ export class ActivityService {
       if (!existingActivity) {
         const activity = this.activityRepository.create({
           date,
-          time: '18:00',
-          place: 'Default Place',
+          time: '19:00',
+          place: '사당종합체육관',
         });
         await this.activityRepository.save(activity);
       }
