@@ -1,45 +1,44 @@
-import { RegisterData } from "../types/types";
+import { TLoginData, TRegisterData } from "../types/types";
 
-export const fetchRegister = async (data: RegisterData) => {
-   const response = await fetch("/auth/register", {
+const fetchData = async (url: string, options: RequestInit = {}) => {
+   const response = await fetch(url, options);
+   return response.json();
+};
+
+export const fetchRegister = (data: TRegisterData) => {
+   return fetchData("/auth/register", {
       method: "POST",
       headers: {
          "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
    });
-   return response.json();
 };
 
-export const fetchLogin = async (data: { email: string; password: string }) => {
-   const response = await fetch("/auth/login", {
+export const fetchLogin = (data: TLoginData) => {
+   return fetchData("/auth/login", {
       method: "POST",
       headers: {
          "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
    });
-   return response.json();
 };
 
-export const fetchActivitiesGenerate = async () => {
-   const response = await fetch("/activities/generate", {
+export const fetchActivitiesGenerate = () => {
+   return fetchData("/activities/generate", {
       method: "POST",
    });
-   return response.json();
 };
 
-export const fetchActivities = async () => {
-   const response = await fetch("/activities");
-   return response.json();
+export const fetchActivities = () => {
+   return fetchData("/activities");
 };
 
-export const fetchMyReservations = async () => {
-   const response = await fetch("/reservations/my");
-   return response.json();
+export const fetchMyReservations = () => {
+   return fetchData("/reservations/my");
 };
 
-export const fetchReservationsByDate = async (date: string) => {
-   const response = await fetch(`/reservations/date/${date}`);
-   return response.json();
+export const fetchReservationsByDate = (date: string) => {
+   return fetchData(`/reservations/date/${date}`);
 };

@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { LoginData } from "@/app/types/types";
+import { TLoginData } from "@/app/types/types";
 import { fetchLogin } from "@/app/utils/api";
 
 function Login() {
-   const [loginData, setLoginData] = useState<LoginData>({
+   const [loginData, setLoginData] = useState<TLoginData>({
       email: "",
       password: "",
    });

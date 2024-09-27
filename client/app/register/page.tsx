@@ -1,11 +1,11 @@
 "use client";
 
-import { RegisterData } from "@/app/types/types";
+import { TRegisterData } from "@/app/types/types";
 import { fetchRegister } from "@/app/utils/api";
 import React, { useState } from "react";
 
 function Register() {
-   const [registerData, setRegisterData] = useState<RegisterData>({
+   const [registerData, setRegisterData] = useState<TRegisterData>({
       username: "",
       email: "",
       password: "",

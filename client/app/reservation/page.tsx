@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import { fetchActivitiesGenerate } from "../utils/api";
-import { Calendar } from "@/components/ui/calendar";
+import { Calendar } from "@/app/ui/calendar";
 
 function Reservation() {
    useEffect(() => {
