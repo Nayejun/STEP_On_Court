@@ -1,15 +1,16 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { TLoginData } from "@/app/types/types";
-import { fetchLogin } from "@/app/utils/api";
+import React, { useState } from "react";
+import useStore from "../utils/store";
+import { ILogin } from "../types/types";
 
 function Login() {
-   const [loginData, setLoginData] = useState<TLoginData>({
+   const [loginData, setLoginData] = useState<ILogin>({
       email: "",
       password: "",
    });
-   const [accessToken, setAccessToken] = useState<string | null>(null);
+
+   const login = useStore((state) => state.login);
 
    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setLoginData({
@@ -20,12 +21,7 @@ function Login() {
 
    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      try {
-         const res = await fetchLogin(loginData);
-         setAccessToken(res.accessToken);
-      } catch (err) {
-         console.error(err);
-      }
+      await login(loginData);
    };
 
    return (

@@ -1,14 +1,7 @@
-"use client";
-
-import React, { useEffect } from "react";
-import { fetchActivitiesGenerate } from "../utils/api";
+import React from "react";
 import { Calendar } from "@/app/components/ui/calendar";
 
 function Reservation() {
-   useEffect(() => {
-      fetchActivitiesGenerate();
-   }, []);
-
    return <Calendar />;
 }
 

@@ -1,15 +1,17 @@
 "use client";
 
-import { TRegisterData } from "@/app/types/types";
-import { fetchRegister } from "@/app/utils/api";
+import { IRegister } from "@/app/types/types";
 import React, { useState } from "react";
+import useStore from "../utils/store";
 
 function Register() {
-   const [registerData, setRegisterData] = useState<TRegisterData>({
+   const [registerData, setRegisterData] = useState<IRegister>({
       username: "",
       email: "",
       password: "",
    });
+
+   const register = useStore((state) => state.register);
 
    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setRegisterData({
@@ -18,9 +20,9 @@ function Register() {
       });
    };
 
-   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      fetchRegister(registerData);
+      await register(registerData);
    };
 
    return (

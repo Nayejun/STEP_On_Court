@@ -1,9 +1,8 @@
-import { fetchActivities } from "@/app/utils/api";
+import useStore from "./store";
 
 function getActivity() {
-   fetchActivities().then((res) => {
-      return res.activity;
-   });
+   const allReservations = useStore((state) => state.allReservations);
+   return allReservations;
 }
 
 export default getActivity;
