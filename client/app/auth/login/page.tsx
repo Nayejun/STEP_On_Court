@@ -7,6 +7,7 @@ function Login() {
       email: "",
       password: "",
    });
+   const [accessToken, setAccessToken] = useState<string | null>(null);
 
    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setLoginData({
@@ -19,7 +20,7 @@ function Login() {
       e.preventDefault();
       try {
          const res = await fetchLogin(loginData);
-         localStorage.setItem("accessToken", res.token);
+         setAccessToken(res.accessToken);
       } catch (err) {
          console.error(err);
       }
