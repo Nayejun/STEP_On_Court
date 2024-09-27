@@ -1,3 +1,5 @@
+"use client";
+
 import { RegisterData } from "@/app/types/types";
 import { fetchRegister } from "@/app/utils/api";
 import React, { useState } from "react";
