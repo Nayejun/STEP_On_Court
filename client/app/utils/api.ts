@@ -28,3 +28,8 @@ export const fetchActivitiesGenerate = async () => {
    });
    return response.json();
 };
+
+export const fetchActivities = async () => {
+   const response = await fetch("/api/activities");
+   return response.json();
+};
