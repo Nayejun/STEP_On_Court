@@ -4,6 +4,10 @@ import { IRegister } from "@/app/types/types";
 import React, { useEffect, useState } from "react";
 import useStore from "../utils/store";
 import { validateSignup } from "../utils/validations";
+import { cn } from "../lib/utils";
+import Stack from "@/app/components/ui/stack";
+import { Input } from "../components/ui/input";
+import { Button } from "../components/ui/button";
 
 function Register() {
    const [registerData, setRegisterData] = useState<IRegister>({
@@ -27,33 +31,42 @@ function Register() {
    };
 
    return (
-      <div>
-         <h1>Register</h1>
-         <form onSubmit={handleSubmit}>
-            <input
-               type="text"
-               name="username"
-               placeholder="Username"
-               value={registerData.username}
-               onChange={handleChange}
-            />
-            <input
-               type="email"
-               name="email"
-               placeholder="Email"
-               value={registerData.email}
-               onChange={handleChange}
-            />
-            <input
-               type="password"
-               name="password"
-               placeholder="Password"
-               value={registerData.password}
-               onChange={handleChange}
-            />
-            <button type="submit">Register</button>
-         </form>
-      </div>
+      <Stack justify="center" align="center" bgColor="pink">
+         <Stack
+            justify="center"
+            align="center"
+            flexDirection="column"
+            bgColor="skyblue"
+         >
+            <h1>Register</h1>
+            <form onSubmit={handleSubmit}>
+               <Input
+                  type="text"
+                  name="username"
+                  placeholder="Username"
+                  value={registerData.username}
+                  onChange={handleChange}
+               />
+               <Input
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  value={registerData.email}
+                  onChange={handleChange}
+               />
+               <Input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  value={registerData.password}
+                  onChange={handleChange}
+               />
+               <Stack justify="center" align="center">
+                  <Button type="submit">Register</Button>
+               </Stack>
+            </form>
+         </Stack>
+      </Stack>
    );
 }
 
