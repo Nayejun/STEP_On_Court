@@ -1,8 +1,9 @@
 "use client";
 
 import { IRegister } from "@/app/types/types";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useStore from "../utils/store";
+import { validateSignup } from "../utils/validations";
 
 function Register() {
    const [registerData, setRegisterData] = useState<IRegister>({
@@ -22,7 +23,7 @@ function Register() {
 
    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      await register(registerData);
+      validateSignup(registerData) ? await register(registerData) : null;
    };
 
    return (
