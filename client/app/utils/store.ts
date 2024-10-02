@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { IFixReservation, IRegister } from "../types/types";
+import { IFixReservation, ILogin, IRegister } from "../types/types";
 
 interface StoreState {
    activities: any[];
@@ -43,7 +43,7 @@ const useStore = create<StoreState>((set) => ({
       set({ user: data });
    },
 
-   login: async (loginData: { email: string; password: string }) => {
+   login: async (loginData: ILogin) => {
       const response = await fetch("/api/auth/login", {
          method: "POST",
          headers: {

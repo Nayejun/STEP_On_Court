@@ -1,7 +1,7 @@
 "use client";
 
 import { IRegister } from "@/app/types/types";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useStore from "../utils/store";
 import { validateSignup } from "../utils/validations";
 
@@ -12,7 +12,6 @@ function Register() {
       password: "",
    });
 
-   const [errors, setErrors] = useState<any[]>([]);
    const register = useStore((state) => state.register);
 
    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,14 +23,7 @@ function Register() {
 
    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      const validationResult = validateSignup(registerData);
-
-      if (validationResult.success) {
-         setErrors([]);
-         await register(registerData);
-      } else {
-         setErrors(validationResult.errors || []);
-      }
+      validateSignup(registerData) ? await register(registerData) : null;
    };
 
    return (
@@ -45,15 +37,6 @@ function Register() {
                value={registerData.username}
                onChange={handleChange}
             />
-            {errors.find((error) => error.path?.includes("username")) && (
-               <p>
-                  {
-                     errors.find((error) => error.path?.includes("username"))
-                        ?.message
-                  }
-               </p>
-            )}
-
             <input
                type="email"
                name="email"
@@ -61,15 +44,6 @@ function Register() {
                value={registerData.email}
                onChange={handleChange}
             />
-            {errors.find((error) => error.path?.includes("email")) && (
-               <p>
-                  {
-                     errors.find((error) => error.path?.includes("email"))
-                        ?.message
-                  }
-               </p>
-            )}
-
             <input
                type="password"
                name="password"
@@ -77,15 +51,6 @@ function Register() {
                value={registerData.password}
                onChange={handleChange}
             />
-            {errors.find((error) => error.path?.includes("password")) && (
-               <p>
-                  {
-                     errors.find((error) => error.path?.includes("password"))
-                        ?.message
-                  }
-               </p>
-            )}
-
             <button type="submit">Register</button>
          </form>
       </div>

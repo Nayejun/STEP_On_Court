@@ -21,3 +21,23 @@ export const validateSignup = (data: SignupData) => {
       return { success: false, errors: [{ message: "Unknown error" }] };
    }
 };
+const loginSchema = z.object({
+   email: z.string().email({ message: "이메일 주소를 확인해주세요." }),
+   password: z
+      .string()
+      .min(6, { message: "비밀번호는 6자 이상이어야 합니다." }),
+});
+
+type LoginData = z.infer<typeof loginSchema>;
+
+export const validateLogin = (data: LoginData) => {
+   try {
+      loginSchema.parse(data);
+      return { success: true, errors: null };
+   } catch (e) {
+      if (e instanceof z.ZodError) {
+         return { success: false, errors: e.errors };
+      }
+      return { success: false, errors: [{ message: "Unknown error" }] };
+   }
+};
