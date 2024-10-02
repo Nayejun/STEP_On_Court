@@ -1,13 +1,12 @@
 "use client";
 
-import { IRegister } from "@/app/types/types";
 import React, { useEffect, useState } from "react";
-import useStore from "../utils/store";
-import { validateSignup } from "../utils/validations";
-import { cn } from "../lib/utils";
+import { IRegister } from "@/app/types/types";
+import useStore from "@/app/utils/store";
+import { validateSignup } from "@/app/utils/validations";
+import { Input } from "@/app/components/ui/input";
+import { Button } from "@/app/components/ui/button";
 import Stack from "@/app/components/ui/stack";
-import { Input } from "../components/ui/input";
-import { Button } from "../components/ui/button";
 
 function Register() {
    const [registerData, setRegisterData] = useState<IRegister>({
