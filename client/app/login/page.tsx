@@ -1,16 +1,16 @@
 "use client";
 
 import React, { useState } from "react";
-import useStore from "../utils/store";
-import { ILogin } from "../types/types";
-import { validateLogin } from "../utils/validations";
+import { Input } from "@/components/ui/input";
+import { validateLogin } from "@/utils/validations";
+import { ILogin } from "@/types/types";
+import useStore from "@/utils/store";
 
 function Login() {
    const [loginData, setLoginData] = useState<ILogin>({
       email: "",
       password: "",
    });
-   const [errors, setErrors] = useState<any[]>([]);
 
    const login = useStore((state) => state.login);
 
@@ -23,20 +23,13 @@ function Login() {
 
    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      const validationResult = validateLogin(loginData);
-
-      if (validationResult.success) {
-         setErrors([]);
-         await login(loginData);
-      } else {
-         setErrors(validationResult.errors || []);
-      }
+      validateLogin(loginData) ? await login(loginData) : null;
    };
 
    return (
       <div>
          <form onSubmit={handleSubmit}>
-            <input
+            <Input
                type="email"
                name="email"
                value={loginData.email}

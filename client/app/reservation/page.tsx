@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Calendar } from "@/app/components/ui/calendar";
+import { Calendar } from "@/components/ui/calendar";
 
 function Reservation() {
    const [date, setDate] = React.useState<Date | undefined>(undefined);
