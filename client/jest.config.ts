@@ -13,7 +13,6 @@ const config: Config = {
       "/node_modules/",
       "^.+\\.module\\.(css|sass|scss)$",
    ],
-
    moduleNameMapper: {
       "^@/(.*)$": "<rootDir>/src/$1",
    },
