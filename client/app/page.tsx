@@ -1,3 +1,9 @@
-import Image from "next/image";
+import AuthForm from "./components/auth/authForm";
 
-export default function Home() {}
+export default function Home() {
+   return (
+      <>
+         <AuthForm authType="login" />
+      </>
+   );
+}

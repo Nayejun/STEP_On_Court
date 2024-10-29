@@ -9,6 +9,10 @@ export interface ILogin {
    password: string;
 }
 
+export interface IAuthFormProps {
+   authType: "login" | "register";
+}
+
 export interface ICreateReservation {
    date: string;
    time: string;

@@ -1,10 +1,12 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+
+import React, { useEffect, useState } from "react";
+
+import Calendar from "react-calendar";
 import { cn } from "@/app/lib/utils";
-import useStore from "@app/utils/store";
+import useStore from "@/app/utils/store";
 
 export type CalendarProps = {
    className?: string;

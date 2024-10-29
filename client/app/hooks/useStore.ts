@@ -6,9 +6,9 @@ interface StoreState {
    getData: (key: string) => any;
 }
 
-export const useStore = create<StoreState>((set) => ({
+export const useStore = create<StoreState>((set, get) => ({
    data: {},
    setData: (key, value) =>
       set((state) => ({ data: { ...state.data, [key]: value } })),
-   getData: (key) => (state: { data: { [x: string]: any } }) => state.data[key],
+   getData: (key) => get().data[key], // get() 함수로 현재 상태에서 값을 가져옴
 }));
