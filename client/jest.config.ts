@@ -14,7 +14,10 @@ const config: Config = {
       "^.+\\.module\\.(css|sass|scss)$",
    ],
    moduleNameMapper: {
-      "^@/(.*)$": "<rootDir>/src/$1",
+      "^@/(.*)$": "<rootDir>/$1",
+      "^@app/(.*)$": "<rootDir>/app/$1",
+      "^@components/(.*)$": "<rootDir>/components/$1",
+      "^@lib/(.*)$": "<rootDir>/lib/$1",
    },
 };
 
