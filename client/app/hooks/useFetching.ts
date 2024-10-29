@@ -1,9 +1,4 @@
-import {
-   QueryClient,
-   QueryKey,
-   useMutation,
-   useQuery,
-} from "@tanstack/react-query";
+import { QueryKey, useMutation, useQuery } from "@tanstack/react-query";
 import axios, { AxiosRequestConfig } from "axios";
 
 import { useStore } from "./useStore";
