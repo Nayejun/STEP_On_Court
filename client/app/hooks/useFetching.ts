@@ -18,8 +18,6 @@ interface UseFetchingOptions {
    onError?: (error: any) => void;
 }
 
-const queryClient = new QueryClient();
-
 export const useFetching = ({
    method = "GET",
    url,
